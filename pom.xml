@@ -12,8 +12,8 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.6</source>
+					<target>1.6</target>
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
@@ -23,11 +23,19 @@
 	<repositories>
 		<repository>
 			<id>yanmushi</id>
-			<url>http://mvn.yanmushi.com/nexus/content/repositories/central/</url>
+			<url>http://mvn.yanmushi.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 
 	<dependencies>
+		<!-- weixin -->
+		<dependency>
+			<groupId>com.qq</groupId>
+			<artifactId>weixin.mp.aes</artifactId>
+			<version>1.6</version>
+		</dependency>
+
+		<!-- spring framework -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
@@ -91,6 +99,19 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
+		</dependency>
+
+		<!-- with weixin -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.9</version>
+		</dependency>
+
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
 		</dependency>
 
 		<dependency>
