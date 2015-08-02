@@ -12,7 +12,7 @@ import com.yanmushi.wxplat.wx.model.WxMsgInput;
  * @author YinLei
  * @since 1.0
  */
-public interface WxEncryptService {
+public interface WxEncryptResolver {
 
 	/**
 	 * 解密消息

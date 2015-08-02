@@ -4,20 +4,19 @@
  */
 package com.yanmushi.wxplat.wx.service;
 
+import com.yanmushi.wxplat.wx.model.WxMsg;
 import com.yanmushi.wxplat.wx.model.WxMsgInput;
 
 /**
- *
  * @author YinLei
- * @since 1.0
+ * @since 
  */
-public interface WxRecivedMsgService {
+public interface WxMsgConvert {
 
 	/**
-	 * 解析接受到的消息，并返回对应消息的处理结果
-	 * @param in
+	 * 将微信端输入的信息转换为业务对象
+	 * @param msg
 	 * @return
 	 */
-	String recived(WxMsgInput input);
-
+	WxMsg convert(String msg, WxMsgInput input);
 }
