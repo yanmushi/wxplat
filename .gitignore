@@ -1,3 +1,6 @@
 /.settings
 /.classpath
 /.project
+
+target/classes/com/yanmushi/wxplat/Dispatcher.class
+/target/
