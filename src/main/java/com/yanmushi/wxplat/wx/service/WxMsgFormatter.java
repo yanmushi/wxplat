@@ -5,13 +5,14 @@
 package com.yanmushi.wxplat.wx.service;
 
 import com.yanmushi.wxplat.wx.model.WxMsg;
-import com.yanmushi.wxplat.wx.model.WxMsgInput;
 
 /**
  * @author YinLei
  * @since 
  */
-public interface WxMsgReader {
+public interface WxMsgFormatter {
 
-	WxMsg read(WxMsgInput input);
+	WxMsg parse();
+	
+	String format(WxMsg msg);
 }

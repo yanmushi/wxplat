@@ -18,5 +18,12 @@ public interface WxMsgConvert {
 	 * @param msg
 	 * @return
 	 */
-	WxMsg convert(String msg, WxMsgInput input);
+	WxMsg convert2Model(String msg, WxMsgInput input);
+	
+	/**
+	 * 将业务对象转换为字符串信息
+	 * @param wxMsg
+	 * @return
+	 */
+	String convert2String(WxMsg wxMsg);
 }

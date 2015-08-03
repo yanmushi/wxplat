@@ -4,6 +4,8 @@
  */
 package com.yanmushi.wxplat.wx.core;
 
+import com.yanmushi.wxplat.wx.model.WxMsgInput;
+
 /**
  * 获取上下文的工具类
  * @author YinYan
@@ -12,6 +14,17 @@ package com.yanmushi.wxplat.wx.core;
 public class WxContextUtil {
 
 	private static WxContext context;
+
+	private static ThreadLocal<WxMsgInput> msgInput = 
+			new ThreadLocal<WxMsgInput>();
+	
+	public static WxMsgInput getMsgInput() {
+		return msgInput.get();
+	}
+	
+	public static void setMsgInput(WxMsgInput input) {
+		msgInput.set(input);
+	}
 	
 	public static WxContext getContext() {
 		return context;

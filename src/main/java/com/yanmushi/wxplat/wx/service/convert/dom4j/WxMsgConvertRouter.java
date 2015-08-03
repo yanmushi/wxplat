@@ -28,7 +28,7 @@ public class WxMsgConvertRouter implements WxMsgConvert, ApplicationContextAware
 	private Map<String, WxMsgConvert> convertMap;
 	
 	@Override
-	public WxMsg convert(String msg, WxMsgInput input) {
+	public WxMsg convert2Model(String msg, WxMsgInput input) {
 		WxMsg wxMsg = null;
 		SAXReader reader = new SAXReader();
 		try {
@@ -38,7 +38,7 @@ public class WxMsgConvertRouter implements WxMsgConvert, ApplicationContextAware
 			
 			WxMsgDom4jConvertHolder.set(root);
 			
-			wxMsg = convertMap.get(msgType).convert(msgType, input);
+			wxMsg = convertMap.get(msgType).convert2Model(msgType, input);
 			
 		} catch (DocumentException e) {
 			e.printStackTrace();
@@ -47,9 +47,13 @@ public class WxMsgConvertRouter implements WxMsgConvert, ApplicationContextAware
 	}
 
 	@Override
-	public void setApplicationContext(ApplicationContext arg0) throws BeansException {
-		// TODO Auto-generated method stub
-		
+	public void setApplicationContext(ApplicationContext context) throws BeansException {
+		convertMap = context.getBeansOfType(WxMsgConvert.class);
+	}
+
+	@Override
+	public String convert2String(WxMsg wxMsg) {
+		return convertMap.get(wxMsg.getMsgType()).convert2String(wxMsg);
 	}
 
 }
