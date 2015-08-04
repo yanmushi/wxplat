@@ -4,6 +4,7 @@
  */
 package com.yanmushi.wxplat.wx.core;
 
+import com.yanmushi.wxplat.wx.model.WxAccessToken;
 import com.yanmushi.wxplat.wx.model.WxMsgInput;
 
 /**
@@ -16,6 +17,20 @@ public class WxContextUtil {
 	private static WxContext context;
 	private static ThreadLocal<WxMsgInput> msgInput = 
 			new ThreadLocal<WxMsgInput>();
+	private static WxAccessToken accessToken;
+
+	private static WxAccessTokenLoader wxAccessTokenLoader;
+	
+	/**
+	 * 获取AccessToken
+	 * @return
+	 */
+	public static WxAccessToken getAccessToken() {
+		if (accessToken == null || !accessToken.isActive()) {
+			accessToken = wxAccessTokenLoader.load();
+		}
+		return accessToken;
+	}
 	
 	public static WxMsgInput getMsgInput() {
 		return msgInput.get();
@@ -50,4 +65,14 @@ public class WxContextUtil {
 	public static String getAppId() {
 		return context.getAppId();
 	}
+
+	public static WxAccessTokenLoader getWxAccessTokenLoader() {
+		return wxAccessTokenLoader;
+	}
+
+	public static void setWxAccessTokenLoader(
+			WxAccessTokenLoader wxAccessTokenLoader) {
+		WxContextUtil.wxAccessTokenLoader = wxAccessTokenLoader;
+	}
+	
 }

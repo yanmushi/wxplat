@@ -23,6 +23,12 @@
 
 	<bean id="wxStartUpListener" class="com.yanmushi.wxplat.wx.core.WxStartUpListener">
 		<property name="wxContext" ref="wxContext"></property>
+		<property name="wxAccessTokenLoader" ref="urlWxAccessTokenLoader"></property>
+	</bean>
+	
+	<bean id="urlWxAccessTokenLoader" class="com.yanmushi.wxplat.wx.core.impl.UrlWxAccessTokenLoader">
+		<property name="appid" value="${weixin.mp.appId}"></property>
+		<property name="secret" value="${weixin.mp.appSecret}"></property>
 	</bean>
 
 	<!-- the service for checking -->

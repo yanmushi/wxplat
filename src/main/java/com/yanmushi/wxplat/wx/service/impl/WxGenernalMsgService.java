@@ -28,6 +28,11 @@ public class WxGenernalMsgService implements WxRecivedMsgService {
 		
 		WxMsg resp = wxMsgHandler.handle(model);
 		
+		if (resp == null) {
+			// 如果没有回复消息，则返回【空白】
+			return "";
+		}
+		
 		return wxMsgFormatter.format(resp);
 	}
 

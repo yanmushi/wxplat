@@ -20,10 +20,13 @@ public class WxStartUpListener implements InitializingBean, ApplicationContextAw
 
 	private WxContext wxContext;
 	private ApplicationContext applicationContext;
+	private WxAccessTokenLoader wxAccessTokenLoader;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		WxContextUtil.setContext(this.wxContext);
+		WxContextUtil.setWxAccessTokenLoader(wxAccessTokenLoader);
+		
 		Map<String, CustomInitializingBean> beans = applicationContext
 				.getBeansOfType(CustomInitializingBean.class);
 
@@ -44,6 +47,14 @@ public class WxStartUpListener implements InitializingBean, ApplicationContextAw
 
 	public void setWxContext(WxContext wxContext) {
 		this.wxContext = wxContext;
+	}
+
+	public WxAccessTokenLoader getWxAccessTokenLoader() {
+		return wxAccessTokenLoader;
+	}
+
+	public void setWxAccessTokenLoader(WxAccessTokenLoader wxAccessTokenLoader) {
+		this.wxAccessTokenLoader = wxAccessTokenLoader;
 	}
 
 }
