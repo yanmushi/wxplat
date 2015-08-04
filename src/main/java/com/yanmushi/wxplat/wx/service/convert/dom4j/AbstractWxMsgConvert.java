@@ -17,13 +17,13 @@ import org.dom4j.Element;
 import com.yanmushi.wxplat.exception.PlatExecption;
 import com.yanmushi.wxplat.wx.model.WxMsg;
 import com.yanmushi.wxplat.wx.model.WxMsgInput;
-import com.yanmushi.wxplat.wx.service.WxMsgConvert;
+import com.yanmushi.wxplat.wx.service.convert.RegistedConvert;
 
 /**
  * @author YinLei
  * @since 1.0
  */
-public abstract class AbstractWxMsgConvert implements WxMsgConvert {
+public abstract class AbstractWxMsgConvert implements RegistedConvert {
 
 	private static final Map<String, Method> toModelMethods;
 	private static final Map<String, Method> toStringMethods;
@@ -61,7 +61,7 @@ public abstract class AbstractWxMsgConvert implements WxMsgConvert {
 	
 	private static void registeGetter(String name) {
 		try {
-			Method getter = WxMsg.class.getMethod("get" + name, String.class);
+			Method getter = WxMsg.class.getMethod("get" + name);
 			toStringMethods.put(name, getter);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
@@ -110,7 +110,7 @@ public abstract class AbstractWxMsgConvert implements WxMsgConvert {
 		
 		return doc.asXML();
 	}
-
+	
 	/**
 	 * @param value
 	 * @param wxMsg

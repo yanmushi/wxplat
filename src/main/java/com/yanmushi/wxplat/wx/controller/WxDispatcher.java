@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,8 @@ import com.yanmushi.wxplat.wx.service.WxRecivedMsgService;
 @Controller
 @RequestMapping("/wx")
 public class WxDispatcher {
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(WxDispatcher.class);
 	
 	@Resource WxRecivedMsgService wxRecivedMsgService;
 	@Resource WxCheckMsgService wxCheckMsgService;
@@ -58,6 +62,7 @@ public class WxDispatcher {
 
 	private void write(HttpServletResponse response, String out)
 			throws IOException {
+		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(out);
 		response.getWriter().flush();
 	}
@@ -75,6 +80,8 @@ public class WxDispatcher {
 		WxMsgInput input = new WxMsgInput(in, signature, timestamp, nonce);
 
 		String out = wxRecivedMsgService.recived(input);
+
+		LOGGER.debug("响应信息：signature: {}, content: {}", signature, out);
 
 		write(response, out);
 	}

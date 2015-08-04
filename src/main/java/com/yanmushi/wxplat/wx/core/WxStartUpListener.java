@@ -38,4 +38,12 @@ public class WxStartUpListener implements InitializingBean, ApplicationContextAw
 		this.applicationContext = context;
 	}
 
+	public WxContext getWxContext() {
+		return wxContext;
+	}
+
+	public void setWxContext(WxContext wxContext) {
+		this.wxContext = wxContext;
+	}
+
 }

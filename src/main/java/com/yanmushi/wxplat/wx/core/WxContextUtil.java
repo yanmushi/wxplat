@@ -14,7 +14,6 @@ import com.yanmushi.wxplat.wx.model.WxMsgInput;
 public class WxContextUtil {
 
 	private static WxContext context;
-
 	private static ThreadLocal<WxMsgInput> msgInput = 
 			new ThreadLocal<WxMsgInput>();
 	

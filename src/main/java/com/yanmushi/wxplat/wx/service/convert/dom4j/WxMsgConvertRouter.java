@@ -5,6 +5,7 @@
 package com.yanmushi.wxplat.wx.service.convert.dom4j;
 
 import java.io.StringReader;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.dom4j.Document;
@@ -18,6 +19,7 @@ import org.springframework.context.ApplicationContextAware;
 import com.yanmushi.wxplat.wx.model.WxMsg;
 import com.yanmushi.wxplat.wx.model.WxMsgInput;
 import com.yanmushi.wxplat.wx.service.WxMsgConvert;
+import com.yanmushi.wxplat.wx.service.convert.RegistedConvert;
 
 /**
  * @author YinLei
@@ -48,7 +50,11 @@ public class WxMsgConvertRouter implements WxMsgConvert, ApplicationContextAware
 
 	@Override
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
-		convertMap = context.getBeansOfType(WxMsgConvert.class);
+		Map<String, RegistedConvert> map = context.getBeansOfType(RegistedConvert.class);
+		convertMap = new HashMap<>();
+		for (RegistedConvert rc : map.values()) {
+			convertMap.put(rc.getRegistedFlag(), rc);
+		}
 	}
 
 	@Override

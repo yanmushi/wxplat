@@ -7,6 +7,7 @@ package com.yanmushi.wxplat.wx.service.convert.dom4j;
 import org.dom4j.Element;
 
 import com.yanmushi.wxplat.wx.model.WxMsg;
+import com.yanmushi.wxplat.wx.model.WxMsgType;
 import com.yanmushi.wxplat.wx.model.WxTextMsg;
 
 /**
@@ -30,6 +31,11 @@ public class WxTextMsgConvert extends AbstractWxMsgConvert {
 	protected void bindCustom2String(WxMsg wxMsg, Element root) {
 		WxTextMsg msg = (WxTextMsg) wxMsg;
 		root.addElement("Content").setText(msg.getContent());
+	}
+
+	@Override
+	public String getRegistedFlag() {
+		return WxMsgType.text.name();
 	}
 
 }
