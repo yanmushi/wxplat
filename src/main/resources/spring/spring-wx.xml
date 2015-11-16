@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="    
+      http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+      http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd">
+
+	<!-- the context configuration -->
+	<bean id="wxContext" class="com.yanmushi.wxplat.wx.core.impl.WxContextImpl">
+		<property name="appId" value="${weixin.mp.appId}"></property>
+		<property name="appSecret" value="${weixin.mp.appSecret}"></property>
+		<property name="token" value="${weixin.mp.token}"></property>
+		<property name="aesKey" value="${weixin.mp.aesKey}"></property>
+	</bean>
+
+	<bean id="wxStartUpListener" class="com.yanmushi.wxplat.wx.core.WxStartUpListener">
+		<property name="wxContext" ref="wxContext"></property>
+		<property name="wxAccessTokenLoader" ref="urlWxAccessTokenLoader"></property>
+	</bean>
+	
+	<bean id="urlWxAccessTokenLoader" class="com.yanmushi.wxplat.wx.core.impl.UrlWxAccessTokenLoader">
+		<property name="appid" value="${weixin.mp.appId}"></property>
+		<property name="secret" value="${weixin.mp.appSecret}"></property>
+	</bean>
+
+	<!-- the service for checking -->
+	<bean id="wxCheckMsgService"
+		class="com.yanmushi.wxplat.wx.service.impl.WxCheckMsgServiceImpl"></bean>
+
+	<!-- the service for general message -->
+	<bean id="wxGenernalMsgService"
+		class="com.yanmushi.wxplat.wx.service.impl.WxGenernalMsgService">
+		<property name="wxMsgFormatter" ref="wxMsgFormatter"></property>
+		<property name="wxMsgHandler" ref="wxMsgHandlerTypeRouter"></property>
+	</bean>
+
+	<!-- the message formatter; relations with encrypting -->
+	<bean id="wxMsgFormatter" class="com.yanmushi.wxplat.wx.service.impl.WxMsgFormatterImpl">
+		<property name="wxEncryptResolver" ref="wxEncryptSafeResolver"></property>
+		<property name="wxMsgConvert" ref="wxMsgConvertRouter"></property>
+	</bean>
+
+	<!-- the encrypt message module -->
+	<bean id="wxEncryptSafeResolver"
+		class="com.yanmushi.wxplat.wx.service.impl.WxEncryptSafeResolver"></bean>
+	<bean id="wxEnccryptDirectResolver"
+		class="com.yanmushi.wxplat.wx.service.impl.WxEnccryptDirectResolver"></bean>
+
+
+	<!-- the message convert configuration -->
+	<bean id="wxMsgConvertRouter"
+		class="com.yanmushi.wxplat.wx.service.convert.dom4j.WxMsgConvertRouter"></bean>
+	<bean id="wxTextMsgConvert"
+		class="com.yanmushi.wxplat.wx.service.convert.dom4j.WxTextMsgConvert"></bean>
+
+	
+	<!-- the message handler with business -->
+	<bean id="wxMsgHandlerTypeRouter"
+		class="com.yanmushi.wxplat.wx.service.handler.WxMsgHandlerTypeRouter">
+		<property name="defaultHandler" ref="simpleWxTextMsgHandler"></property>
+		<property name="handlerMap">
+			<map>
+				<entry key="image" value-ref="collectImageMsgHandler"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="simpleWxTextMsgHandler"
+		class="com.yanmushi.wxplat.wx.service.handler.SimpleWxTextMsgHandler"></bean>
+	<bean id="collectImageMsgHandler" class="com.yanmushi.wxplat.wx.service.handler.CollectImageMsgHandler"></bean>
+</beans>
