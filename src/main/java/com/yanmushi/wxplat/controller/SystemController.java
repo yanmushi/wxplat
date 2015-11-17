@@ -2,7 +2,7 @@
  * Copyright (c) 2014-2015 YanMushi 
  * All rights reserved.
  */
-package com.yanmushi.wxplat.wx.controller;
+package com.yanmushi.wxplat.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

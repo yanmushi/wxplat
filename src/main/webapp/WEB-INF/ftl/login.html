@@ -1,12 +1,45 @@
+<#import "/yms.ftl" as s/>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>登录</title>
-	</head>
-	
-	<body>
-		<div>
-			<input />
+<head>
+<meta charset="utf-8">
+<title>登录</title>
+</head>
+
+<body>
+	<div>
+		<div class="login_frame">
+			<h3>登录</h3>
+			<div class="login_err_panel" style="display: none;" id="err"></div>
+			<form class="login_form" id="loginForm">
+				<div class="login_input_panel" id="js_mainContent">
+					<div class="login_input">
+						<i class="icon_login un"> </i> <input type="text"
+							placeholder="用户名.." id="account" name="account">
+					</div>
+					<div class="login_input">
+						<i class="icon_login pwd"> </i> <input type="password"
+							placeholder="密码.." id="pwd" name="password">
+					</div>
+				</div>
+				<div class="verifycode" style="display: none;" id="verifyDiv">
+					<span class="frm_input_box"> <input class="frm_input"
+						type="text" id="verify" name="verify">
+					</span> <img id="verifyImg" src=""> <a href="javascript:;"
+						id="verifyChange">换一张</a>
+				</div>
+				<div class="login_help_panel">
+					<label class="frm_checkbox_label" for="rememberCheck"> <i
+						class="icon_checkbox"></i> <input type="checkbox"
+						class="frm_checkbox" id="rememberCheck"> 记住帐号
+					</label> <a class="login_forget_pwd"
+						href="/acct/resetpwd?action=send_email_page">无法登录？</a>
+				</div>
+				<div class="login_btn_panel">
+					<a class="btn_login" title="点击登录" href="javascript:" id="loginBt">登录</a>
+				</div>
+			</form>
 		</div>
-	</body>
+		<a href="<@s.url '/plat/home.html'/>">进入首页</a>
+	</div>
+</body>
 </html>
