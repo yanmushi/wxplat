@@ -11,14 +11,13 @@
 	<body>
 		<#include '/common/head.html'/>
 		<div>
+			<#list images as image>
 			<div class="item">
 				<div class="img">
-					<img alt="" src="">
-				</div>
-				<div class="txt">
-					简单、欢快
+					<img alt="" src="<@s.image image.resPath/>">
 				</div>
 			</div>
+			</#list>
 			<div class="item">
 				<div class="img">
 					<img alt="" src="">
