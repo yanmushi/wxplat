@@ -25,7 +25,7 @@ import com.yanmushi.wxplat.wx.service.WxRecivedMsgService;
 
 /**
  * <p>Title: WxDispatcher</p>
- * <p>Description: </p>
+ * <p>Description:web分发 </p>
  *
  * @author YanMushi
  * @version 1.0
